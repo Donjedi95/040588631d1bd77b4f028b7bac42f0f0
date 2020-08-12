@@ -1,0 +1,7 @@
+app_homepage:
+    path: /
+    controller: App\Controller\IndexController::index
+
+app_movie:
+    path: /movie/{id}
+    controller: App\Controller\MovieController::show

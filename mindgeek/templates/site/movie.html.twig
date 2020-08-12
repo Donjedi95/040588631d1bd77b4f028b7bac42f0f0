@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/movie.css') }}" type="text/css">
+{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+    <main role="main">
+        <div class="container">
+            <h1 class="text-center">{{ movie.headline }}</h1>
+            <hr/>
+            <div class="row py-1">
+                <div class="col-md-4">
+                    {% include 'site/components/movie/sideBar.html.twig' with { 'movie': movie } %}
+                </div>
+                <div class="col-md-8">
+                    {% include 'site/components/movie/mainContent.html.twig' with { 'movie': movie } %}
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

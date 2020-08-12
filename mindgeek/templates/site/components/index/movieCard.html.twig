@@ -1,0 +1,21 @@
+{% for column in movieInfo %}
+    <div class="card movie-card">
+        <a class="text-decoration-none text-dark" href="{{ path('app_movie', {id: column.id}) }}">
+            {% if column.keyArtImages is defined %}
+                {% for keyArtImage in column.keyArtImages %}
+                    {% if (keyArtImage.url is not null) %}
+                        <img class="card-img-top" src="{{ asset(keyArtImage.url) }}" alt="{{ column.headline }}">
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+            <div class="card-body">
+                <br/>
+                <p class="text-muted text-center">Last updated {{ column.lastUpdated }}</p>
+                <br/>
+                <h5 class="card-title text-center">{{ column.headline }}</h5>
+                <p class="card-text">{{ column.synopsis }}</p>
+            </div>
+        </a>
+    </div>
+    <br/>
+{% endfor %}

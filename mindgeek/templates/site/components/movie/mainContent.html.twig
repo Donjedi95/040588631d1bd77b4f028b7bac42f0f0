@@ -1,0 +1,12 @@
+<article>
+    {{ movie.body }}
+</article>
+<br/>
+{% if movie.videos is defined %}
+    {% include 'site/components/movie/videoPlayer.html.twig' with { 'videos': movie.videos } %}
+{% endif %}
+<br/>
+<br/>
+{% if movie.cardImages is defined %}
+    {% include 'site/components/movie/carousel.html.twig' with { 'cardImages': movie.cardImages } %}
+{% endif %}

@@ -1,0 +1,8 @@
+<br/>
+<br/>
+<ul class="list-group list-group-flush">
+    Viewing Window:
+    {% for key, info in viewingWindow %}
+        <li class="list-group-item">{{ key | reverseCamelCase | title}}: {{ info }}</li>
+    {% endfor %}
+</ul>

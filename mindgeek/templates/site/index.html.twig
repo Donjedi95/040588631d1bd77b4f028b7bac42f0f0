@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/index.css') }}" type="text/css">
+{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+    <br/>
+    <main role="main">
+        <div class="container">
+            {% include 'site/components/index/movieCardDeck.html.twig' with {'content': content } %}
+        </div>
+    </main>
+{% endblock %}

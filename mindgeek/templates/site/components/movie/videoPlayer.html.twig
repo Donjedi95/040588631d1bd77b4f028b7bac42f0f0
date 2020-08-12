@@ -1,0 +1,36 @@
+{% if videos is defined %}
+    <ul class="nav nav-tabs">
+        {% for video in movie.videos %}
+            <li class="nav-item">
+                <a class="nav-link {% if loop.first %}active{% endif %}" data-toggle="tab"
+                   href="#video{{ loop.index }}">Video {{ loop.index }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+{% if videos is defined %}
+    <div class="tab-content">
+        {% for video in movie.videos %}
+            <div class="tab-pane container {% if loop.first %}active{% else %}fade{% endif %}"
+                 id="video{{ loop.index }}">
+                <h3 class="text-center">{{ video.title }}</h3>
+                <p>Type: {{ video.type }}</p>
+                <video width="704" height="576" controls
+                       poster="{{ video.thumbnailUrl | default('#') }}"
+                       style="margin: auto; display: block">
+                    <source src="{{ video.url }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                {% if video.alternatives is defined %}
+                    <div class="btn-group d-flex justify-content-center" style="margin: 0 auto;">
+                        {% for alternative in video.alternatives %}
+                            <a href="{{ alternative.url }}"
+                               class="btn btn-lg btn-outline-secondary">{{ alternative.quality }}</a>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}

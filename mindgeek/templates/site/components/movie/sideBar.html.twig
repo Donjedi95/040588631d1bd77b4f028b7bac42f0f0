@@ -1,0 +1,28 @@
+<div class="h-100 sidebar">
+    {% set keyArtImageCounter = 0 %}
+    {% for keyArtImage in movie.keyArtImages %}
+        {% if (keyArtImage.url is not null) %}
+            {% set keyArtImageCounter = keyArtImageCounter + 1 %}
+            <div class="text-center">
+                <img class="img-fluid img-thumbnail" src="{{ asset(keyArtImage.url) }}" alt="{{ movie.headline }}">
+                <p>{{ keyArtImage.w }} x {{ keyArtImage.h }}</p>
+            </div>
+        {% endif %}
+    {% endfor %}
+    {% if keyArtImageCounter is same as(0) %}
+        <img class="img-fluid img-thumbnail" src="{{ asset('/placeholder.jpg') }}" alt="{{ movie.headline }}">
+    {% endif %}
+    <br/>
+    <br/>
+    <div class="meta">
+        {% include 'site/components/movie/details.html.twig' with {'movie': movie}%}
+
+        {% if movie.viewingWindow is defined %}
+            {% include 'site/components/movie/viewingWindow.html.twig' with {'viewingWindow': movie.viewingWindow} %}
+        {% endif %}
+
+        {% if movie.galleries is defined %}
+            {% include 'site/components/movie/galleries.html.twig' with {'galleries': movie.galleries} %}
+        {% endif %}
+    </div>
+</div>

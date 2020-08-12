@@ -1,0 +1,15 @@
+<br/>
+<br/>
+<ul class="list-group list-group-flush">
+    Galleries:
+    {% for gallery in galleries %}
+        <li class="list-group-item">Title: {{ gallery.title }}</li>
+        {% if gallery.thumbnailUrl is defined and gallery.thumbnailUrl is not null %}
+            <li class="list-group-item">
+                <img width="350" height="350" src="{{ gallery.thumbnailUrl }}" alt="{{ gallery.title }}">
+            </li>
+        {% endif %}
+        <li class="list-group-item"><a href="{{ gallery.url }}">Url</a></li>
+        <li class="list-group-item">Id: {{ gallery.id }}</li>
+    {% endfor %}
+</ul>

@@ -1,0 +1,7 @@
+{% for movieInfo in content | batch(3) %}
+    <div class="card-deck">
+        {% include 'site/components/index/movieCard.html.twig' %}
+    </div>
+    <br/>
+    <br/>
+{% endfor %}
