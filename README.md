@@ -13,9 +13,9 @@
   - then go to docker folder and run "*docker-compose up*"
 
 ## RUN 
-    - docker exec -it docker_php-fpm_1 php /var/www/bin/console app:import:mindgeek:images* (optional)
+    docker exec -it docker_php-fpm_1 php /var/www/bin/console app:import:mindgeek:images* (optional)
 
 ## Test Units RUN
-    - docker exec -it docker_php-fpm_1 php /var/www/vendor/bin codecept run unit
+    docker exec -it docker_php-fpm_1 php /var/www/vendor/bin codecept run unit
     
 ## Access app on http://localhost
