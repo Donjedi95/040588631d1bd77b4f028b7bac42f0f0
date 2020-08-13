@@ -2,6 +2,13 @@
 
 ## **Get latest Docker build** from https://www.docker.com/get-started
 
+## Clone the project in a folder
+
+## Share the folder with Docker:
+  - Go into docker Dashboard
+  - Go to Settings > Resources > File Sharing 
+  - At the end of the list press on the + and add the folder of the project to the list
+
 ## After installing Docker on your PC:
 
 [WINDOWS]
