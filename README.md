@@ -12,8 +12,8 @@
   - in mindgeek folder run "*init.sh*"
   - then go to docker folder and run "*docker-compose up*"
 
-## RUN 
-    docker exec -it docker_php-fpm_1 php /var/www/bin/console app:import:mindgeek:images* (optional)
+## RUN (optional)
+    docker exec -it docker_php-fpm_1 php /var/www/bin/console app:import:mindgeek:images
 
 ## Test Units RUN
     docker exec -it docker_php-fpm_1 php /var/www/vendor/bin codecept run unit
