@@ -5,7 +5,7 @@
 ## After installing Docker on your PC:
 
 [WINDOWS]
-  - RUN start.bat
+  - RUN *start.bat*
   - **WAIT** untill you receive on the cmd prompt "**ready to handle connections**"
 
 [Linux/MAC]
