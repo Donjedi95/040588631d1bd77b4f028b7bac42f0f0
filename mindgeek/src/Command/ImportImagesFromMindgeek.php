@@ -2,7 +2,6 @@
 
 namespace App\Command;
 
-use App\AppInterface;
 use App\Entity\CacheImage\KeyArtImage;
 use App\Service\Cache;
 use App\Service\Mindgeek;
@@ -10,6 +9,7 @@ use Psr\Cache\InvalidArgumentException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
@@ -17,14 +17,15 @@ use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 
 class ImportImagesFromMindgeek extends Command
 {
+    private ParameterBagInterface $parameterBag;
     private Mindgeek $mindgeekService;
-
     private Cache $cacheService;
 
     protected static $defaultName = 'app:import:mindgeek:images';
 
-    public function __construct(Mindgeek $mindgeekService, Cache $cacheService)
+    public function __construct(ParameterBagInterface $parameterBag, Mindgeek $mindgeekService, Cache $cacheService)
     {
+        $this->parameterBag = $parameterBag;
         $this->mindgeekService = $mindgeekService;
         $this->cacheService = $cacheService;
 
@@ -33,8 +34,7 @@ class ImportImagesFromMindgeek extends Command
 
     protected function configure()
     {
-        $this
-            ->setDescription('Imports the keyArtImages from Mindgeek endpoint');
+        $this->setDescription('Imports the keyArtImages from Mindgeek endpoint');
     }
 
     /**
@@ -49,7 +49,7 @@ class ImportImagesFromMindgeek extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        ini_set('default_socket_timeout', AppInterface::IMAGE_DOWNLOAD_COMMAND_SOCKET_TIMEOUT);
+        ini_set('default_socket_timeout', $this->parameterBag->get('image_download_command_socket_timeout'));
 
         $output->writeln('============================================================');
         $output->writeln('Starting import from ' . $this->mindgeekService::SHOWCASE_URL);

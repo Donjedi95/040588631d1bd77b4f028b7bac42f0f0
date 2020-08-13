@@ -1,0 +1,8 @@
+/mindgeek/.env
+/mindgeek/.env.test
+/mindgeek/vendor/
+/mindgeek/public/images/
+/mindgeek/var/
+/docker/logs/nginx/access.log
+/docker/logs/nginx/error.log.log
+

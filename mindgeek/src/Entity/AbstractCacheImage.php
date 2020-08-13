@@ -25,8 +25,7 @@ abstract class AbstractCacheImage
     {
         $movie = $this->movie;
         $arrayKey = $this->getArrayKey();
-        $movieId = $this->getMovieId();
-        $imageCounter = 0;
+        $movieId = $this->movie['id'];
 
         if (isset($movie[$arrayKey])) {
             foreach ($movie[$arrayKey] as &$image) {
@@ -38,7 +37,6 @@ abstract class AbstractCacheImage
 
                     $cachedImage = $this->cache->getCachedImage($cacheKey, $image, $movieId, $directory);
                     if (file_exists($cachedImage)) {
-                        $imageCounter++;
                         $image[$imageUrlKey] = $cachedImage;
                     } else {
                         $image[$imageUrlKey] = null;
@@ -72,12 +70,7 @@ abstract class AbstractCacheImage
     protected function getImageName($imageUrl): string
     {
         $imageParts = explode('/', $imageUrl);
-        return $imageParts[count($imageParts) - 1];
-    }
-
-    protected function getMovieId(): string
-    {
-        return $this->movie['id'];
+        return trim($imageParts[count($imageParts) - 1]);
     }
 
     abstract function getImageUrlKey(): string;

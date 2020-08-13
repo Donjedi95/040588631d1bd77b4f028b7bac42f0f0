@@ -3,7 +3,6 @@
 namespace App\Service;
 
 use Exception;
-use App\AppInterface;
 use Psr\Cache\InvalidArgumentException;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Cache\Adapter\AdapterInterface;
@@ -53,7 +52,7 @@ class Mindgeek
         try {
             $jsonResponse = $this->fetchShowcaseResponseContent();
         } catch (Exception $exception) {
-            $item = $this->cache->getItem(AppCacheInterface::CACHE_SHOWCASE_JSON_KEY);
+            $item = $this->cache->getItem($this->parameterBag->get('cache_showcase_key'));
             if (!$item->isHit()) {
                 throw new Exception('Timeout and no cache');
             }
@@ -62,7 +61,7 @@ class Mindgeek
         }
 
         // If i get a 500 Internal Server Error to have a cached response to not break the website
-        $item = $this->cache->getItem(AppCacheInterface::CACHE_SHOWCASE_JSON_KEY);
+        $item = $this->cache->getItem($this->parameterBag->get('cache_showcase_key'));
         $item->set($jsonResponse);
         $this->cache->save($item);
 
@@ -79,7 +78,7 @@ class Mindgeek
     public function fetchShowcaseResponseContent(): string
     {
         // To increase app speed if response takes longer than 1 second, use the last saved jsonResponse
-        ini_set('default_socket_timeout', AppInterface::SHOWCASE_JSON_DEFAULT_SOCKET_TIMEOUT);
+        ini_set('default_socket_timeout', $this->parameterBag->get('showcase_json_default_socket_timeout'));
         return $this->client->request('GET',self::SHOWCASE_URL)->getContent();
     }
 
@@ -91,7 +90,7 @@ class Mindgeek
      */
     public function getImageFromUrl(array $image, string $directory): string
     {
-        ini_set('default_socket_timeout', AppInterface::IMAGE_DOWNLOAD_DEFAULT_SOCKET_TIMEOUT);
+        ini_set('default_socket_timeout', $this->parameterBag->get('image_download_default_socket_timeout'));
         $publicPath = $directory;
 
         $directory = $this->parameterBag->get('images_folder') . $directory;

@@ -26,7 +26,7 @@ class VideoThumbnail extends AbstractCacheImage
         return strtr(
             self::VIDEO_THUMBNAIL_CACHE_KEY,
             [
-                '{id}' => $this->getMovieId(),
+                '{id}' => $this->movie['id'],
                 '{imageName}' => $imageName
             ]
         );
@@ -37,7 +37,7 @@ class VideoThumbnail extends AbstractCacheImage
         return strtr(
             self::VIDEO_THUMBNAILS_DIRECTORY,
             [
-                '{id}' => $this->getMovieId()
+                '{id}' => $this->movie['id']
             ]
         );
     }

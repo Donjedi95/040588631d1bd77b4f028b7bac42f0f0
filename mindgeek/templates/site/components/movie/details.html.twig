@@ -8,16 +8,16 @@
     <li class="list-group-item">Directors: {{ movie.directors | column('name') | join(', ') }}</li>
     <li class="list-group-item">Genres: {{ movie.genres | default('') | join(', ')}}</li>
     <li class="list-group-item">Rating: {{ movie.rating | default('') }}</li>
-    <li class="list-group-item">Cert: {{ movie.cert }}</li>
-    <li class="list-group-item">Class: {{ movie.class }}</li>
+    <li class="list-group-item">Cert: {{ movie.cert | default('') }}</li>
+    <li class="list-group-item">Class: {{ movie.class | default('') }}</li>
     <li class="list-group-item">Duration: {{ util.secondsToMinutes(movie.duration) }}</li>
     <li class="list-group-item">Review Author: {{ movie.reviewAuthor | default('')}}</li>
-    <li class="list-group-item">Last updated: {{ movie.lastUpdated }}</li>
+    <li class="list-group-item">Last updated: {{ movie.lastUpdated | default('') }}</li>
     <li class="list-group-item"><a href="{{ movie.skyGoUrl | default('#')}}">SkyGoUrl</a></li>
     <li class="list-group-item">SkyGoId: {{ movie.skyGoId |default ('') }}</li>
     <li class="list-group-item">Id: {{ movie.id }}</li>
-    <li class="list-group-item">Sum: {{ movie.sum }}</li>
-    <li class="list-group-item">Synopsis: {{ movie.synopsis }}</li>
-    <li class="list-group-item">Url: {{ movie.url }}</li>
-    <li class="list-group-item">Year: {{ movie.year }}</li>
+    <li class="list-group-item">Sum: {{ movie.sum | default('') }}</li>
+    <li class="list-group-item">Synopsis: {{ movie.synopsis | default('') }}</li>
+    <li class="list-group-item">Url: {{ movie.url | default('') }}</li>
+    <li class="list-group-item">Year: {{ movie.year | default('') }}</li>
 </ul>

@@ -8,7 +8,7 @@ use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Contracts\Cache\ItemInterface;
 
-class Cache implements AppCacheInterface
+class Cache
 {
     private LoggerInterface $logger;
     private FilesystemAdapter $cache;
@@ -21,9 +21,9 @@ class Cache implements AppCacheInterface
         $this->parameterBag = $parameterBag;
         $this->mindgeekService = $mindgeekService;
         $this->cache = new FilesystemAdapter(
-            self::CACHE_NAMESPACE,
-            self::CACHE_DEFAULT_LIFE_TIME,
-            $this->parameterBag->get('kernel.project_dir') . '/' . self::CACHE_DIRECTORY
+            $this->parameterBag->get('cache_namespace'),
+            $this->parameterBag->get('cache_default_life_time'),
+            $this->parameterBag->get('kernel.project_dir') . '/' . $this->parameterBag->get('cache_directory')
         );
     }
 

@@ -26,7 +26,7 @@ class CardImage extends AbstractCacheImage
         return strtr(
             self::CARD_IMAGE_CACHE_KEY,
             [
-                '{id}' => $this->getMovieId(),
+                '{id}' => $this->movie['id'],
                 '{imageName}' => $imageName
             ]
         );
@@ -37,7 +37,7 @@ class CardImage extends AbstractCacheImage
         return strtr(
             self::CARD_IMAGE_DIRECTORY,
             [
-                '{id}' => $this->getMovieId()
+                '{id}' => $this->movie['id']
             ]
         );
     }

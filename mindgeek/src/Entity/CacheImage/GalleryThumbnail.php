@@ -26,7 +26,7 @@ class GalleryThumbnail extends AbstractCacheImage
         return strtr(
             self::GALLERY_THUMBNAIL_CACHE_KEY,
             [
-                '{id}' => $this->getMovieId(),
+                '{id}' => $this->movie['id'],
                 '{imageName}' => $imageName
             ]
         );
@@ -37,7 +37,7 @@ class GalleryThumbnail extends AbstractCacheImage
         return strtr(
             self::GALLERY_THUMBNAILS_DIRECTORY,
             [
-                '{id}' => $this->getMovieId()
+                '{id}' => $this->movie['id']
             ]
         );
     }

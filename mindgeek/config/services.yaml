@@ -5,6 +5,14 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     images_folder: '%kernel.project_dir%/public/'
+    image_download_default_socket_timeout: 3
+    image_download_command_socket_timeout: 5
+    showcase_json_default_socket_timeout: 1
+
+    cache_showcase_key: 'app_showcase_response'
+    cache_namespace: 'app_cache'
+    cache_default_life_time: '3600' #1 hour
+    cache_directory: 'var/cache/app'
 services:
     # default configuration for services in *this* file
     _defaults:

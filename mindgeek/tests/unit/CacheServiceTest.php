@@ -23,16 +23,19 @@ class CacheServiceTest extends Unit
     {
         /** @var MockObject|Cache $cacheService */
         $cacheService = $this->make(Cache::class, [
-            'cache' => new FilesystemAdapter(
-                'test',
-                60,
-                'var/cache/test'
-            ),
+            'cache' => $this->make(FilesystemAdapter::class, [
+                'get' => function () {
+                    return '';
+                },
+            ]),
             'mindgeekService' => $this->make(Mindgeek::class, [
                 'getImageFromUrl' => function () {
                     return '';
                 }
             ]),
+            'deleteCache' => function () {
+                return true;
+            },
             'logger' => new Logger()
         ]);
 

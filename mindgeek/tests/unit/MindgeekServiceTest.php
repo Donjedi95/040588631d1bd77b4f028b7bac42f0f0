@@ -3,7 +3,6 @@
 namespace App\Tests\unit;
 
 use Exception;
-use App\Service\AppCacheInterface;
 use App\Service\Mindgeek;
 use Codeception\Test\Unit;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -40,12 +39,19 @@ class MindgeekServiceTest extends Unit
         /** @var MockObject|Mindgeek $mindgeekService */
         $mindgeekService = $this->make(Mindgeek::class,
             [
-                'client' => new MockHttpClient(new MockResponse($body, []))
+                'client' => new MockHttpClient(new MockResponse($body, [])),
+                'parameterBag' => $this->make(ParameterBag::class,
+                    [
+                        'get' => function () {
+                            return 1;
+                        }
+                    ]
+                )
+
             ]
         );
 
         $result = $mindgeekService->fetchShowcaseResponseContent();
-        var_dump($result);
         $this->assertEquals('[{"id":"some_id"}]', $result);
     }
 
@@ -71,6 +77,13 @@ class MindgeekServiceTest extends Unit
                 'fetchShowcaseResponseContent' => function () {
                     return '[{"id":"some_id"}]';
                 },
+                'parameterBag' => $this->make(ParameterBag::class,
+                    [
+                        'get' => function () {
+                            return 'some_key';
+                        }
+                    ]
+                ),
                 'cache' => $cacheService
             ],
         );
@@ -84,7 +97,7 @@ class MindgeekServiceTest extends Unit
             ],
             $result
         );
-        $this->assertTrue($cacheService->delete(AppCacheInterface::CACHE_SHOWCASE_JSON_KEY));
+        $this->assertTrue($cacheService->delete('123'));
     }
 
     public function setTestGetImageFromUrlData(): array
